@@ -8,14 +8,18 @@
   "private": true,
   "dependencies": {
     "@nestjs/common": "^10.0.2",
+    "@nestjs/config": "^4.0.0",
     "@nestjs/core": "^10.0.2",
     "@nestjs/platform-express": "^10.0.2",
+    "@nestjs/typeorm": "^11.0.0",
     "axios": "^1.6.0",
     "next": "~15.1.4",
+    "pg": "^8.13.1",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.8.0"
+    "rxjs": "^7.8.0",
+    "typeorm": "^0.3.20"
   },
   "devDependencies": {
     "@eslint/compat": "^1.1.1",
