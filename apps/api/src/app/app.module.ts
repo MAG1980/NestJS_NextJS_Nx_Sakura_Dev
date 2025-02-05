@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { DataSource } from 'typeorm'
 import dbConfig from '../configs/db.config'
+import { UserModule } from '../user/user.module'
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import dbConfig from '../configs/db.config'
       load: [dbConfig],
     }),
     TypeOrmModule.forRootAsync(dbConfig.asProvider()),
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

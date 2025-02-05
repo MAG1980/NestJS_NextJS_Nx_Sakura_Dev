@@ -38,6 +38,40 @@
       "options": {
         "passWithNoTests": true
       }
+    },
+    "migration:gen": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "ts-node --project tsconfig.app.json ../../node_modules/typeorm/cli migration:generate src/migrations/{args.name} --pretty -d src/data-source.ts",
+        "forwardAllArgs": true,
+        "cwd": "{projectRoot}",
+        "parallel": false
+      }
+    },
+    "migration:create": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "ts-node --project tsconfig.app.json ../../node_modules/typeorm/cli migration:create src/migrations/{args.name}",
+        "forwardAllArgs": true,
+        "cwd": "{projectRoot}",
+        "parallel": false
+      }
+    },
+    "migration:run": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "ts-node --project tsconfig.app.json ../../node_modules/typeorm/cli migration:run -d src/data-source.ts",
+        "cwd": "{projectRoot}",
+        "parallel": false
+      }
+    },
+    "migration:revert": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "ts-node --project tsconfig.app.json ../../node_modules/typeorm/cli migration:revert -d src/data-source.ts",
+        "cwd": "{projectRoot}",
+        "parallel": false
+      }
     }
   }
 }
