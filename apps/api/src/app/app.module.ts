@@ -6,6 +6,9 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { DataSource } from 'typeorm'
 import dbConfig from '../configs/db.config'
 import { UserModule } from '../user/user.module'
+import { ProfileModule } from '../profile/profile.module'
+import { PostModule } from '../post/post.module'
+import { TagModule } from '../tag/tag.module'
 
 @Module({
   imports: [
@@ -19,6 +22,9 @@ import { UserModule } from '../user/user.module'
     }),
     TypeOrmModule.forRootAsync(dbConfig.asProvider()),
     UserModule,
+    ProfileModule,
+    PostModule,
+    TagModule,
   ],
   controllers: [AppController],
   providers: [AppService],
