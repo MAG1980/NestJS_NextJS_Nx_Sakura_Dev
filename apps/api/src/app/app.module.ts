@@ -9,6 +9,8 @@ import { UserModule } from '../user/user.module'
 import { ProfileModule } from '../profile/profile.module'
 import { PostModule } from '../post/post.module'
 import { TagModule } from '../tag/tag.module'
+import { GraphQLModule } from '@nestjs/graphql'
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 
 @Module({
   imports: [
@@ -21,6 +23,14 @@ import { TagModule } from '../tag/tag.module'
       load: [dbConfig],
     }),
     TypeOrmModule.forRootAsync(dbConfig.asProvider()),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      //Code-first approach
+      autoSchemaFile: true,
+      debug: true,
+      //Включить графический интерфейс playground
+      playground: true,
+    }),
     UserModule,
     ProfileModule,
     PostModule,

@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from 'typeorm'
 
-export class Initial1739048475609 implements MigrationInterface {
-  name = 'Initial1739048475609'
+export class Initial1739055750332 implements MigrationInterface {
+  name = 'Initial1739055750332'
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
@@ -49,7 +49,7 @@ export class Initial1739048475609 implements MigrationInterface {
     await queryRunner.query(`
             CREATE TABLE "users" (
                 "id" INT DEFAULT nextval('"users_id_seq"') NOT NULL,
-                "username" varchar NOT NULL,
+                "name" varchar NOT NULL,
                 "email" varchar NOT NULL,
                 "role" "public"."users_role_enum" NOT NULL DEFAULT 'user',
                 "profile_id" int8,
