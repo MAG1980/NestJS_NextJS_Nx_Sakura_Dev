@@ -10,10 +10,13 @@ export class UserService {
   ) {}
 
   async findAll(): Promise<User[]> {
-    return await this.userRepository.find({
+    return await this.userRepository
+      .find
+      /*      {
       //Использование отношений в данном случае неоптимально.
       // Из БД всегда будут выбираться все поля, даже если они не требуются.
-      relations: ['profile', 'posts'],
-    })
+      //relations: ['profile', 'posts'],
+    }*/
+      ()
   }
 }

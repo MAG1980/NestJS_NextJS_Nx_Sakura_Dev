@@ -1,9 +1,9 @@
 import { DataSource } from 'typeorm'
 import { Seeder, SeederFactoryManager } from 'typeorm-extension'
+import { faker } from '@faker-js/faker'
 import { Tag } from '../tag/entities/Tag.entity'
 import { User } from '../user/entities/User.entity'
 import { Profile } from '../profile/entities/Profile.entity'
-import { faker } from '@faker-js/faker'
 import { Post } from '../post/entities/Post.entity'
 
 export class MainSeeder implements Seeder {
@@ -26,13 +26,16 @@ export class MainSeeder implements Seeder {
     const users = await Promise.all(
       //Преимущество перебора фейкового массива перед циклом for
       //является возможность добавлять несколько свойств асинхронно (одновременно)
-      Array(20)
+      Array(10)
         .fill('')
         .map(async () => {
           //make - создание экземпляра сущности с дополнительными свойствами
           const user = await userFactory.make({
-            //Создаёт, сохраняет в БД и возвращает созданную сущность
-            profile: await profileFactory.save(),
+            //Вызов profileFactory пришлось обернуть в Promise, т.к. User.profile имеет тип Promise<Profile>
+            profile: Promise.resolve(
+              //Создаёт, сохраняет в БД и возвращает созданную сущность
+              await profileFactory.save(),
+            ),
           })
 
           return user
@@ -45,7 +48,7 @@ export class MainSeeder implements Seeder {
     console.log('Seeding posts...')
     const postFactory = seederFactoryManager.get(Post)
     const posts = await Promise.all(
-      Array(100)
+      Array(50)
         .fill('')
         .map(async () => {
           const post = await postFactory.make({

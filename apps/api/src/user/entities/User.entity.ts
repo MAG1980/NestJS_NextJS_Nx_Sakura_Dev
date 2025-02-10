@@ -36,11 +36,14 @@ export class User {
   role: Role
 
   @Field(() => Profile)
-  @OneToOne(() => Profile, (profile) => profile.user, { cascade: true })
+  @OneToOne(() => Profile, (profile) => profile.user, {
+    cascade: true,
+    lazy: true,
+  })
   @JoinColumn({ name: 'profile_id' })
-  profile: Profile
+  profile: Promise<Profile>
 
   @Field(() => [Post])
   @OneToMany(() => Post, (post) => post.user, { cascade: true })
-  posts: Post[]
+  posts: Promise<Post[]>
 }
