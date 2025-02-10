@@ -29,7 +29,7 @@ export class Post {
   @Field(() => User)
   @ManyToOne(() => User, (user) => user.posts)
   @JoinColumn({ name: 'user_id' })
-  user: User
+  user: Promise<User>
 
   @Field(() => [Tag])
   @ManyToMany(() => Tag, (tag) => tag.posts)
@@ -38,5 +38,5 @@ export class Post {
     joinColumn: { name: 'post_id', referencedColumnName: 'id' },
     inverseJoinColumn: { name: 'tag_id', referencedColumnName: 'id' },
   })
-  tags: Tag[]
+  tags: Promise<Tag[]>
 }

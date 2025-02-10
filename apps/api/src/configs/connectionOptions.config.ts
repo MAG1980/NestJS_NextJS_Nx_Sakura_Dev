@@ -5,9 +5,11 @@ export default {
   type: 'cockroachdb',
   ssl: true,
   timeTravelQueries: false,
+  //Без этой опции не работает приложение
+  autoLoadEntities: true,
+  //Без этой опции не работают посев данных и миграции
   entities: [__dirname + '/../**/*.entity{.ts,.js}'],
   migrations: [__dirname + '/../migrations/*{.ts,.js}'],
-  synchronize: true,
+  // synchronize: true,
   logging: true,
-  autoLoadEntities: true,
 } as CockroachConnectionOptions

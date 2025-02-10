@@ -26,7 +26,7 @@ export class MainSeeder implements Seeder {
     const users = await Promise.all(
       //Преимущество перебора фейкового массива перед циклом for
       //является возможность добавлять несколько свойств асинхронно (одновременно)
-      Array(10)
+      Array(3)
         .fill('')
         .map(async () => {
           //make - создание экземпляра сущности с дополнительными свойствами
@@ -48,14 +48,16 @@ export class MainSeeder implements Seeder {
     console.log('Seeding posts...')
     const postFactory = seederFactoryManager.get(Post)
     const posts = await Promise.all(
-      Array(50)
+      Array(15)
         .fill('')
         .map(async () => {
           const post = await postFactory.make({
-            user: faker.helpers.arrayElement(users),
-            tags: faker.helpers.arrayElements(
-              tags,
-              faker.number.int({ min: 0, max: 2 }),
+            user: Promise.resolve(faker.helpers.arrayElement(users)),
+            tags: Promise.resolve(
+              faker.helpers.arrayElements(
+                tags,
+                faker.number.int({ min: 0, max: 2 }),
+              ),
             ),
           })
 
