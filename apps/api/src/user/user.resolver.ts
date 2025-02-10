@@ -1,4 +1,4 @@
-import { Query, Resolver } from '@nestjs/graphql'
+import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { User } from './entities/User.entity'
 import { UserService } from './user.service'
 
@@ -9,5 +9,12 @@ export class UserResolver {
   @Query(() => [User], { name: 'users' })
   async findAll(): Promise<User[]> {
     return await this.userService.findAll()
+  }
+
+  //Универсальный способ разрешения свойств сущности при ленивой загрузке
+  @ResolveField('profile')
+  //Название метода должно совпадать с названием свойства сущности
+  async profile(@Parent() user: User) {
+    return await user.profile
   }
 }
