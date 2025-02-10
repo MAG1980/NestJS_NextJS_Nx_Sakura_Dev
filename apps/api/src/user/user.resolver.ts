@@ -1,4 +1,11 @@
-import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
+import {
+  Args,
+  Int,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql'
 import { User } from './entities/User.entity'
 import { UserService } from './user.service'
 
@@ -9,6 +16,12 @@ export class UserResolver {
   @Query(() => [User], { name: 'users' })
   async findAll(): Promise<User[]> {
     return await this.userService.findAll()
+  }
+
+  @Query(() => User, { name: 'getUser' })
+  //nullable: true - значение по умолчанию
+  async getUser(@Args('id', { type: () => Int, nullable: true }) id: number) {
+    return this.userService.findOneById(id)
   }
 
   //Универсальный способ разрешения свойств сущности при ленивой загрузке
