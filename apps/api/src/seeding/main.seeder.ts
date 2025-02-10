@@ -1,10 +1,10 @@
 import { DataSource } from 'typeorm'
 import { Seeder, SeederFactoryManager } from 'typeorm-extension'
-import { Tag } from '../tag/entities/tag.entity'
-import { User } from '../user/entities/user.entity'
-import { Profile } from '../profile/entities/profile.entity'
+import { Tag } from '../tag/entities/Tag.entity'
+import { User } from '../user/entities/User.entity'
+import { Profile } from '../profile/entities/Profile.entity'
 import { faker } from '@faker-js/faker'
-import { Post } from '../post/entities/post.entity'
+import { Post } from '../post/entities/Post.entity'
 
 export class MainSeeder implements Seeder {
   async run(

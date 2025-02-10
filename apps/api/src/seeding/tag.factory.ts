@@ -1,4 +1,4 @@
-import { Tag } from '../tag/entities/tag.entity'
+import { Tag } from '../tag/entities/Tag.entity'
 import { setSeederFactory } from 'typeorm-extension'
 import { Faker, ru } from '@faker-js/faker'
 

@@ -9,4 +9,5 @@ export default {
   migrations: [__dirname + '/../migrations/*{.ts,.js}'],
   synchronize: true,
   logging: true,
+  autoLoadEntities: true,
 } as CockroachConnectionOptions

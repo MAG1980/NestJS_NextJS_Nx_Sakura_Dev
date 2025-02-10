@@ -1,4 +1,4 @@
-import { Profile } from '../profile/entities/profile.entity'
+import { Profile } from '../profile/entities/Profile.entity'
 import { setSeederFactory } from 'typeorm-extension'
 import { Faker, ru } from '@faker-js/faker'
 

@@ -6,8 +6,8 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
-import { Post } from '../../post/entities/post.entity'
-import { Profile } from '../../profile/entities/profile.entity'
+import { Post } from '../../post/entities/Post.entity'
+import { Profile } from '../../profile/entities/Profile.entity'
 import { Role } from '../enums/role.enum'
 import { Field, ID, ObjectType } from '@nestjs/graphql'
 

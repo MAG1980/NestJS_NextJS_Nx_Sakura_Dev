@@ -1,5 +1,5 @@
 import { setSeederFactory } from 'typeorm-extension'
-import { User } from '../user/entities/user.entity'
+import { User } from '../user/entities/User.entity'
 import { Role } from '../user/enums/role.enum'
 import { Faker, ru } from '@faker-js/faker'
 

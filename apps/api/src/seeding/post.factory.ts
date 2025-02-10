@@ -1,4 +1,4 @@
-import { Post } from '../post/entities/post.entity'
+import { Post } from '../post/entities/Post.entity'
 import { setSeederFactory } from 'typeorm-extension'
 import { Faker, ru } from '@faker-js/faker'
 

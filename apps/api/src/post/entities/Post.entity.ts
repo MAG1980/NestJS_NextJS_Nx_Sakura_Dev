@@ -7,8 +7,8 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
-import { User } from '../../user/entities/user.entity'
-import { Tag } from '../../tag/entities/tag.entity'
+import { User } from '../../user/entities/User.entity'
+import { Tag } from '../../tag/entities/Tag.entity'
 import { Field, ID, ObjectType } from '@nestjs/graphql'
 
 @ObjectType()
