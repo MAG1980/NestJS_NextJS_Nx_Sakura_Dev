@@ -11,6 +11,7 @@ import { PostModule } from '../post/post.module'
 import { TagModule } from '../tag/tag.module'
 import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
+import { AuthModule } from '../auth/auth.module'
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
       //Включить графический интерфейс playground
       playground: true,
     }),
+    AuthModule,
     UserModule,
     ProfileModule,
     PostModule,
