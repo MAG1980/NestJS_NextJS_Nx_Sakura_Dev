@@ -30,4 +30,9 @@ export class UserService {
 
     return await this.userRepository.save(newUser)
   }
+
+  async removeUser(id: number): Promise<boolean> {
+    const result = await this.userRepository.delete(id)
+    return result.affected === 1
+  }
 }
