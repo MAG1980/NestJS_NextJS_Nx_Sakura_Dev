@@ -30,6 +30,10 @@ export class User {
   @Column()
   email: string
 
+  @Field({ nullable: true })
+  @Column({ select: false, nullable: true })
+  password: string
+
   @IsEnum(Role)
   @Field(() => Role)
   @Column({
