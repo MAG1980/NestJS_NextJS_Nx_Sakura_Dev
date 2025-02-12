@@ -3,7 +3,7 @@
  * This is only a minimal backend to get started.
  */
 
-import { Logger } from '@nestjs/common'
+import { Logger, ValidationPipe } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app/app.module'
 import * as process from 'node:process'
@@ -15,6 +15,8 @@ async function bootstrap() {
   app.setGlobalPrefix(globalPrefix)
 
   app.useGlobalFilters(new EntityNotFoundFilter())
+
+  app.useGlobalPipes(new ValidationPipe())
 
   const port = process.env.PORT || 3000
 
