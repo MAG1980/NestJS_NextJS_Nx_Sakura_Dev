@@ -7,11 +7,15 @@ import { Logger } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app/app.module'
 import * as process from 'node:process'
+import { EntityNotFoundFilter } from './filters/entity-not-found.filter'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
   const globalPrefix = 'api'
   app.setGlobalPrefix(globalPrefix)
+
+  app.useGlobalFilters(new EntityNotFoundFilter())
+
   const port = process.env.PORT || 3000
 
   console.log('DB_URL=', process.env.DB_URL)
