@@ -10,6 +10,7 @@ import { Post } from '../../post/entities/Post.entity'
 import { Profile } from '../../profile/entities/Profile.entity'
 import { Role } from '../enums/role.enum'
 import { Field, ID, ObjectType } from '@nestjs/graphql'
+import { IsEmail, IsEnum, IsString } from 'class-validator'
 
 @ObjectType()
 @Entity({ name: 'users' })
@@ -18,15 +19,18 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number
 
+  @IsString()
   //Для строковых полей не требуется указывать тип GraphQL
   @Field()
   @Column()
   name: string
 
+  @IsEmail()
   @Field()
   @Column()
   email: string
 
+  @IsEnum(Role)
   @Field(() => Role)
   @Column({
     type: 'enum',
