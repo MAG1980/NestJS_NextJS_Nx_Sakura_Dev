@@ -2,9 +2,8 @@ import { Field, InputType } from '@nestjs/graphql'
 import { IsEmail, IsString, MinLength } from 'class-validator'
 
 @InputType()
-export class CreateUserInput {
+export class SignUpInput {
   @IsString()
-  //Для строковых полей не требуется указывать тип GraphQL
   @Field()
   name: string
 

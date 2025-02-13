@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { User } from './entities/User.entity'
 import { Repository } from 'typeorm'
-import { CreateUserInput } from './dto/create-user.input'
+import { SignUpInput } from '../auth/dto/sign-up.input'
 import { Role } from './enums/role.enum'
 
 @Injectable()
@@ -26,7 +26,7 @@ export class UserService {
     return await this.userRepository.findOneByOrFail({ id })
   }
 
-  async createUser(createUserInput: CreateUserInput) {
+  async createUser(createUserInput: SignUpInput) {
     const newUser = this.userRepository.create({
       ...createUserInput,
       role: Role.USER,
@@ -38,5 +38,13 @@ export class UserService {
   async removeUser(id: number): Promise<boolean> {
     const result = await this.userRepository.delete(id)
     return result.affected === 1
+  }
+
+  async findOneByEmail(email: string) {
+    //Если пользователь не будет найден, то будет выброшено исключение.
+    return await this.userRepository.findOneOrFail({
+      where: { email },
+      select: ['id', 'password', 'role'],
+    })
   }
 }
