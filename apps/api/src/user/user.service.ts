@@ -4,6 +4,7 @@ import { User } from './entities/User.entity'
 import { Repository } from 'typeorm'
 import { SignUpInput } from '../auth/dto/sign-up.input'
 import { Role } from './enums/role.enum'
+import { UpdateUserInput } from './dto/update-user.input'
 
 @Injectable()
 export class UserService {
@@ -46,5 +47,16 @@ export class UserService {
       where: { email },
       select: ['id', 'password', 'role'],
     })
+  }
+
+  async updateUser(id: number, updateUserInput: UpdateUserInput) {
+    const user = new User()
+    const partialUser = this.userRepository.merge(
+      user,
+      { id },
+      { ...updateUserInput },
+    )
+
+    return await this.userRepository.save(partialUser)
   }
 }
