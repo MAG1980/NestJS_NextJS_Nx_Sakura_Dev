@@ -6,6 +6,7 @@ import { User } from '../user/entities/User.entity'
 import { SignInInput } from './dto/sign-in.input'
 import { JwtPayload } from './types/jwt-payload'
 import { JwtService } from '@nestjs/jwt'
+import { JwtUser } from './types/jwt-user'
 
 @Injectable()
 export class AuthService {
@@ -54,5 +55,15 @@ export class AuthService {
       role: user.role,
       accessToken,
     }
+  }
+
+  async validateJwtUser(userId: number) {
+    const dbUser = await this.userService.findOneByIdOrFail(userId)
+    const jwtUser: JwtUser = {
+      userId: dbUser.id,
+      role: dbUser.role,
+    }
+
+    return jwtUser
   }
 }
