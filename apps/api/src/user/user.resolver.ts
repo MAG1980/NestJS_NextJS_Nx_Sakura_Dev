@@ -14,10 +14,14 @@ import { UseGuards } from '@nestjs/common'
 import { UpdateUserInput } from './dto/update-user.input'
 import { CurrentUser } from '../auth/decorators/current-user.decorator'
 import type { JwtUser } from '../auth/types/jwt-user'
+import { Roles } from '../auth/decorators/roles.decorator'
+import { Role } from './enums/role.enum'
+import { RoleGuard } from '../auth/guards/role.guard'
 
 @Resolver(() => User)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
+
   //Если не указать имя запроса, то оно будет совпадать с названием метода.
   @UseGuards(GqlJwtGuard)
   @Query(() => [User], { name: 'users' })
@@ -44,6 +48,12 @@ export class UserResolver {
     return this.userService.removeUser(id)
   }
 
+  @Roles(Role.ADMIN, Role.USER)
+  @UseGuards(RoleGuard)
+  //@UseGuards(GqlJwtGuard) следует располагать ближе к обработчику запроса,
+  // чтобы он успел добавить свойство Request.user.role,
+  //Потому что обработчик передаётся каждому декоратору в виде обратного вызова,
+  // а первыми срабатывают декораторы, расположенные в коде ближе к обработчику.
   @UseGuards(GqlJwtGuard)
   @Mutation(() => User)
   updateUser(
